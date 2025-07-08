@@ -1,9 +1,66 @@
 import org.junit.jupiter.api.Test;
 
-public class MainTest {
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType.LaunchOptions;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
 
+public class MainTest {
     @Test
-    public void firstTest() {
-        System.out.println("First Test");
+    public void Main() throws InterruptedException {
+        System.out.println("In Main");
+
+        // Initialize Search keywords
+        String searchKeyword = "Lozenge";
+        String targetProduct = "Strepsils Sugarfree Lemon Lozenge 16pcs";
+        String targetProductCategory = "Throat";
+        String targetProductBrand = "Strepsils";
+        int purchaseQuantity = 2;
+        // 0 (Search and enter)
+        // 1 (Search and click view all)
+        // 2 (Search and click category)
+        int searchMode = 2;
+
+        // Initialize Playwright
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(
+                new LaunchOptions()
+                        .setHeadless(false)
+                        .setSlowMo(1000));
+        Page page = browser.newPage();
+
+        // Add try-catch-finally for playwright
+        try {
+
+            page.navigate("https://www.mannings.com.hk/en");
+            page.waitForTimeout(3000);
+            HandlePopUp.closeCookiesPopUp(page);
+            HandlePopUp.closePromotionPopUp(page);
+            if (searchMode == 0) {
+                HandleSearch.search(page, searchKeyword, searchMode);
+                HandleSearchResult.searchFor(page, searchKeyword, targetProduct);
+            } else if (searchMode == 1) {
+                HandleSearch.search(page, searchKeyword, searchMode);
+                HandleSearchResult.searchFor(page, searchKeyword, targetProduct);
+            } else {
+                HandleSearch.search(page, searchKeyword, searchMode);
+                HandleSearchResult.filterCategories(page, targetProductCategory, false);
+                HandleSearchResult.filterBrand(page, targetProductBrand, false);
+                HandleSearchResult.addItem(page, targetProduct);
+            }
+
+            HandleProductDetailPage.AddProductToCart(page, targetProduct, purchaseQuantity);
+            HandleShoppingCart.goToShoppingCart(page);
+
+        } // catch (Exception e) {
+          // System.out.println(e.getMessage());
+          // }
+        finally {
+            page.close();
+            browser.close();
+            playwright.close();
+        }
+
     }
+
 }
