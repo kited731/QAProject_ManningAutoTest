@@ -10,6 +10,7 @@ public class HandleProductDetailPage {
         Locator addToCartBtn = page
                 .locator("xpath=//section[contains(@class,\"productFullDetail-actions\")]/*/*/*/*/*/button");
 
+        addToCartBtn.scrollIntoViewIfNeeded();
         addToCartBtn.click();
 
         if (quantity > 1) {

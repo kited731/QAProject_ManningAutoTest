@@ -5,29 +5,24 @@ import org.junit.jupiter.api.Test;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType.LaunchOptions;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
-public class MainTest {
+public class checkoutMemberTest {
     @Test
-    public void Main() {
-        System.out.println("In Main");
+    public void checkoutTest() {
 
         // Initialize Search keywords
-        String searchKeyword = "Lozenge";
-        String targetProduct = "Strepsils Sugarfree Lemon Lozenge 16pcs";
-        String targetProductCategory = "Throat";
-        String targetProductBrand = "Strepsils";
+        String targetProduct = "Maro Volume Up Shampoo (Non-Silicone) 460ml";
+        String targetProductMainCategory = "Hair";
+        String targetProductSubCategory = "Shampoo";
+        String targetProductBrand = "Maro";
         int purchaseQuantity = 2;
 
         // Settings
         int clickInteval = 1000;
         int waitForTimeout = 5000;
-
-        // 0 (Search and enter)
-        // 1 (Search and click view all)
-        // 2 (Search and click category)
-        int searchMode = 2;
 
         // Initialize Playwright
         Playwright playwright = Playwright.create();
@@ -48,31 +43,29 @@ public class MainTest {
             page.waitForTimeout(waitForTimeout);
             HandlePopUp.closeCookiesPopUp(page);
             HandlePopUp.closePromotionPopUp(page);
-            if (searchMode == 0) {
-                HandleSearch.search(page, searchKeyword, searchMode);
-                HandleSearchResult.searchFor(page, searchKeyword, targetProduct);
-            } else if (searchMode == 1) {
-                HandleSearch.search(page, searchKeyword, searchMode);
-                HandleSearchResult.searchFor(page, searchKeyword, targetProduct);
-            } else {
-                HandleSearch.search(page, searchKeyword, searchMode);
-                HandleSearchResult.filterCategories(page, targetProductCategory, false);
-                HandleSearchResult.filterBrand(page, targetProductBrand, false);
-                HandleSearchResult.addItem(page, targetProduct);
-            }
 
+            String mainCategoryXpath = "xpath=//div[contains(@class,\"megaMenuItem-megaMenuItem\")]/a/span[text()=\""
+                    + targetProductMainCategory + "\"]";
+            System.out.println(mainCategoryXpath);
+            Locator mainCategoryMenuBtn = page
+                    .locator(mainCategoryXpath)
+                    .first();
+            mainCategoryMenuBtn.hover();
+
+            String subCategoryXpath = "xpath=//div/div/a[text()=\"" + targetProductSubCategory + "\"]";
+            Locator subCategoryMenuBtn = page.locator(subCategoryXpath);
+            subCategoryMenuBtn.hover();
+            subCategoryMenuBtn.click();
+
+            HandleSearchResult.filterBrand(page, targetProductBrand, true);
+            page.waitForTimeout(waitForTimeout);
+            HandleSearchResult.addItem(page, targetProduct);
             HandleProductDetailPage.AddProductToCart(page, targetProduct, purchaseQuantity);
             HandleShoppingCart.goToShoppingCart(page);
-
-        } // catch (Exception e) {
-          // System.out.println(e.getMessage());
-          // }
-        finally {
+        } finally {
             page.close();
             browser.close();
             playwright.close();
         }
-
     }
-
 }
