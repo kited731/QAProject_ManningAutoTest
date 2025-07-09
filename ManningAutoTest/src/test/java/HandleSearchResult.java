@@ -38,9 +38,18 @@ public class HandleSearchResult {
     }
 
     public static void filterCategories(Page page, String CategoryName, Boolean bySearch) {
-        Locator categoryFilter = page.locator("xpath=//fieldset/div/div/button[contains(text(),\"Show all\")]").first();
-        categoryFilter.scrollIntoViewIfNeeded();
-        categoryFilter.click();
+
+        if (bySearch) {
+            Locator categoryFilterSearch = page.locator("#searchInput").first();
+            categoryFilterSearch.scrollIntoViewIfNeeded();
+            categoryFilterSearch.fill(CategoryName);
+            categoryFilterSearch.blur();
+        } else {
+            Locator categoryFilter = page.locator("xpath=//fieldset/div/div/button[contains(text(),\"Show all\")]")
+                    .first();
+            categoryFilter.scrollIntoViewIfNeeded();
+            categoryFilter.click();
+        }
 
         String targetXpath = "xpath=//label[text()=\"" + CategoryName + "\"]";
         Locator filterOption = page.locator(targetXpath);
