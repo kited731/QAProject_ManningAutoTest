@@ -26,21 +26,39 @@ public class RegistrationManningTest {
       //clickOption1.click();
       Locator fillTitle = page.locator("#title");
       fillTitle.click();
-      Locator fillTitle1 = page.getByText("Mr.");
+      Locator fillTitle1 = page.getByText("Mrs");
       fillTitle1.click();
       Locator fillFirstName = page.locator("#firstName");
       fillFirstName.fill("JK");
       Locator fillLastName = page.locator("#lastName");
       fillLastName.fill("Lee");
       Locator fillEmail = page.locator("#Email");
-      fillEmail.fill("Lee");
-    //   Locator fillPhoneID = page.locator("#phoneId_label");
-    //   Locator fillPhoneID1 = page.getByText("+852.");
-    //   fillPhoneID1.click();
-      page.pause();
+      fillEmail.fill("lee@example.com");
+      Locator fillPhoneID = page.locator("#countryCode").nth(0);
+      fillPhoneID.click();
+      Locator fillPhoneID1 = page.getByText("+853");
+      fillPhoneID1.click();
+      Locator fillPhoneNum = page.locator("#telephone");
+      fillPhoneNum.fill("12345678");
+      Locator fillPassword = page.locator("#Password");
+      fillPassword.fill("12345678");
+      Locator ConfirmPassword = page.locator("#ConfirmPassword");
+      ConfirmPassword.fill("12345678");
+      Locator clickTnC= page.getByText("Terms & Conditions");
+      clickTnC.click();
+      Locator closeTCPop = page.locator("xpath=//*[name()='path' and contains(@d,'M15.172 2.')]");
+      closeTCPop.click(); 
+      Locator registrationbox= page.locator("#subscribe");
+      registrationbox.click();
+      Locator clickDMP = page.getByText("Direct Marketing purposes");
+      clickDMP.click();
+      Locator closeDMP = page.locator("xpath= //*[name()='path' and contains(@d,'M15.172 2.')]");
+      closeDMP.click();
     //   Locator shopLocator = page.getByText("OL");
     //   shopLocator.click();
-      
+      Locator createanaccount = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create an account"));
+      createanaccount.click();
+      page.pause();
       // Close Playwright =================
       playwright.close();
 
