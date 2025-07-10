@@ -9,7 +9,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
-public class checkoutMemberTest {
+public class CheckoutMemberTest {
     @Test
     public void checkoutTest() {
 
@@ -62,6 +62,17 @@ public class checkoutMemberTest {
             HandleSearchResult.addItem(page, targetProduct);
             HandleProductDetailPage.AddProductToCart(page, targetProduct, purchaseQuantity);
             HandleShoppingCart.goToShoppingCart(page);
+            HandleCheckoutHomeDelivery.selectDelivery(page);
+            // HandleCheckoutHomeDelivery.increaseQty(page, 1);
+            HandleCheckoutHomeDelivery.updateToQty(page, 10);
+            // HandleCheckoutHomeDelivery.applyCouponCode(page, "25SHOP40");
+
+            page.waitForTimeout(waitForTimeout);
+            HandleCheckoutHomeDelivery.verifyDeliveryFee(page);
+            HandleCheckoutHomeDelivery.checkout(page);
+            HandleCheckoutHomeDelivery.completeDeliveryDetail(page);
+
+            page.waitForTimeout(waitForTimeout);
         } finally {
             page.close();
             browser.close();
