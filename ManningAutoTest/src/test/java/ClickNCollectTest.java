@@ -1,5 +1,3 @@
-package Project.demo;
-
 import org.junit.jupiter.api.Test;
 
 import com.microsoft.playwright.Browser;
