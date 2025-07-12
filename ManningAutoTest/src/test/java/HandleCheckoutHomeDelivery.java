@@ -86,24 +86,52 @@ public class HandleCheckoutHomeDelivery {
 
     public static void checkout(Page page) {
         page.waitForTimeout(3000);
-        page.locator(
-                "xpath=//div/button[contains(@class,\"btnGroup-btn\")]/span[text()=\"Checkout securely\"]")
-                .click();
+        Locator checkOutSecurelyBtn = page
+                .locator("xpath=//div/button[contains(@class,\"btnGroup-btn\")]/span[text()=\"Checkout securely\"]");
+        checkOutSecurelyBtn.scrollIntoViewIfNeeded();
+        checkOutSecurelyBtn.click();
 
-        page.locator("//button[contains(@class,\"signIn-guestButton\")]").click();
+        page.waitForTimeout(5000);
+        Locator guestCheckoutBtn = page
+                .locator("//button[contains(@class,\"signIn-guestButton\")]");
+        guestCheckoutBtn.scrollIntoViewIfNeeded();
+        guestCheckoutBtn.click();
+        page.waitForTimeout(3000);
     }
 
     public static void completeDeliveryDetail(Page page) {
+        fillAddressForm(page);
+        confirmAddress(page);
+        confirmDetail(page);
+    }
+
+    public static void changeDeliveryDetail(Page page) {
+        Locator changeDeliveryBtn = page
+                .locator("xpath=//div[@class=\"deliveryDetail-headTitle-X-I\"]/div");
+        changeDeliveryBtn.scrollIntoViewIfNeeded();
+        changeDeliveryBtn.click();
+
+        Locator shipToDiffAddressBtn = page.locator("xpath=//span[text()=\"Ship to different address\"]");
+        shipToDiffAddressBtn.scrollIntoViewIfNeeded();
+        shipToDiffAddressBtn.click();
+
+        fillAddressForm(page);
+        confirmAddress(page);
+        confirmDetail(page);
+    }
+
+    public static void fillAddressForm(Page page) {
         Faker faker = new Faker();
         String email = faker.name().firstName() + "_" + faker.name().lastName() + "@gmail.com";
         String fullName = faker.name().firstName() + " " + faker.name().lastName();
-        int regionCode = faker.number().numberBetween(0, 2);
+        // int regionCode = faker.number().numberBetween(0, 2);
+        int regionCode = 1;
         String region = "Kowloon";
-        String district = faker.address().city();
+        String district = "Cheung Sha Wan";
         String streetNumber = faker.address().streetAddress();
         String buildingName = faker.address().buildingNumber();
         String floor = faker.number().randomDigitNotZero() + "/F";
-        String countryCode = "+852";
+        String countryCode = "+852"; // +852 or +853 or +86
         String mobile = "61235123";
 
         switch (regionCode) {
@@ -116,19 +144,7 @@ public class HandleCheckoutHomeDelivery {
             case 2:
                 region = "New Territories";
                 break;
-            default:
-                region = "Hong Kong Island";
-                break;
         }
-        System.out.println("email is : " + email);
-        System.out.println("Full Name is : " + fullName);
-        System.out.println("Region is : " + region);
-        System.out.println("District is : " + district);
-        System.out.println("Street Number is : " + streetNumber);
-        System.out.println("Building is : " + buildingName);
-        System.out.println("Floor is : " + floor);
-        System.out.println("Country Code is : " + countryCode);
-        System.out.println("Mobile is : " + mobile);
 
         // Email
         Locator emailInput = page
@@ -143,14 +159,16 @@ public class HandleCheckoutHomeDelivery {
         Locator regionInput = page.locator("#region-root-aGR");
         regionInput.scrollIntoViewIfNeeded();
         regionInput.click();
-        Locator regionInputOption = page.getByText(region);
+        Locator regionInputOption = page
+                .locator("xpath=//div[contains(@class,\"react-select__option\")][text()=\"" + region + "\"]");
         regionInputOption.scrollIntoViewIfNeeded();
         regionInputOption.click();
         // District
         Locator districtInput = page.locator("#region-root-k7a");
         districtInput.scrollIntoViewIfNeeded();
         districtInput.click();
-        Locator districtInputOption = page.getByText("Cheung Sha Wan");
+        Locator districtInputOption = page
+                .locator("xpath=//div[contains(@class,\"react-select__option\")][text()=\"" + district + "\"]");
         districtInputOption.scrollIntoViewIfNeeded();
         districtInputOption.click();
         // Street Number & Name
@@ -169,20 +187,22 @@ public class HandleCheckoutHomeDelivery {
         Locator countryCodeInput = page.locator("#areaCode");
         countryCodeInput.scrollIntoViewIfNeeded();
         countryCodeInput.click();
-        page.getByText("+852").click();
-        // page.getByText("+853").click();
-        // page.getByText("+86").click();
+        page.locator("xpath=//div[contains(@class,\"react-select__option\")][text()=\"" + countryCode + "\"]").click();
 
         // Mobile Number
         Locator phoneInput = page.locator("#telephone");
         phoneInput.fill(mobile);
+    }
 
+    public static void confirmAddress(Page page) {
         // Confirm address button
         Locator confirmAddressBtn = page.locator("xpath=//button[@type=\"submit\"]/span[text()=\"Confirm address\"]");
         confirmAddressBtn.scrollIntoViewIfNeeded();
         confirmAddressBtn.click();
         page.waitForTimeout(5000);
+    }
 
+    public static void confirmDetail(Page page) {
         // Confirm Details button
         Locator confirmDetailBtn = page.getByRole(AriaRole.BUTTON, new GetByRoleOptions().setName("Confirm Details"));
         confirmDetailBtn.scrollIntoViewIfNeeded();

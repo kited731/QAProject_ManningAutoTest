@@ -40,7 +40,7 @@ public class CheckoutMemberTest {
         try {
 
             page.navigate("https://www.mannings.com.hk/en");
-            page.waitForTimeout(waitForTimeout);
+            page.waitForTimeout(waitForTimeout * 2);
             HandlePopUp.closeCookiesPopUp(page);
             HandlePopUp.closePromotionPopUp(page);
 
@@ -71,6 +71,7 @@ public class CheckoutMemberTest {
             HandleCheckoutHomeDelivery.verifyDeliveryFee(page);
             HandleCheckoutHomeDelivery.checkout(page);
             HandleCheckoutHomeDelivery.completeDeliveryDetail(page);
+            HandleCheckoutHomeDelivery.changeDeliveryDetail(page);
 
             page.waitForTimeout(waitForTimeout);
         } finally {

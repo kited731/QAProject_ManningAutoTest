@@ -38,41 +38,80 @@ public class HandleSearchResult {
     }
 
     public static void filterCategories(Page page, String CategoryName, Boolean bySearch) {
+        page.waitForTimeout(5000);
 
-        if (bySearch) {
-            Locator categoryFilterSearch = page.locator("#searchInput").first();
+        Locator categoryFilterSearch = page
+                .locator("xpath=//form/div/fieldset[preceding-sibling::label[text()=\"Categories\"]]/div/input");
+        Locator categoryFilterShowAllBtn = page
+                .locator(
+                        "xpath=//form/div/fieldset[preceding-sibling::label[text()=\"Categories\"]]/div[@class=\"space-y-2\"]/div/button");
+        Locator categoryFilterCheckList = page.locator(
+                "xpath=//form/div/fieldset[preceding-sibling::label[text()=\"Categories\"]]/div/div/div/label[contains(text(),\""
+                        + CategoryName + "\")]");
+
+        // If filter by search, check if search field exist
+        if (bySearch && categoryFilterSearch.isVisible()) {
             categoryFilterSearch.scrollIntoViewIfNeeded();
             categoryFilterSearch.fill(CategoryName);
             categoryFilterSearch.blur();
-        } else {
-            Locator categoryFilter = page.locator("xpath=//fieldset/div/div/button[contains(text(),\"Show all\")]")
-                    .first();
-            categoryFilter.scrollIntoViewIfNeeded();
-            categoryFilter.click();
+        } else if (categoryFilterShowAllBtn.isVisible()) { // Not by search or search not exist, find show all button
+            categoryFilterShowAllBtn.scrollIntoViewIfNeeded();
+            categoryFilterShowAllBtn.click();
         }
 
-        String targetXpath = "xpath=//label[text()=\"" + CategoryName + "\"]";
-        Locator filterOption = page.locator(targetXpath);
-        filterOption.scrollIntoViewIfNeeded();
-        filterOption.click();
+        // After filter is searched or Show All button is click, find the target
+        // category checkbox to check
+        if (categoryFilterCheckList.isVisible()) {
+            categoryFilterCheckList.scrollIntoViewIfNeeded();
+            categoryFilterCheckList.click();
+        }
     }
 
     public static void filterBrand(Page page, String BrandName, Boolean bySearch) {
-        if (bySearch) {
-            Locator brandFilterSearch = page.locator("#searchInput").last();
+        page.waitForTimeout(5000);
+        Locator brandFilterSearch = page
+                .locator("xpath=//form/div/fieldset[preceding-sibling::label[text()=\"Brand\"]]/div/input");
+        Locator brandFilterShowAllBtn = page
+                .locator(
+                        "xpath=//form/div/fieldset[preceding-sibling::label[text()=\"Brand\"]]/div[@class=\"space-y-2\"]/div/button");
+        Locator brandFilterCheckList = page.locator(
+                "xpath=//form/div/fieldset[preceding-sibling::label[text()=\"Brand\"]]/div/div/div/label[contains(text(),\""
+                        + BrandName + "\")]");
+
+        // If filter by search, check if search field exist
+        if (bySearch && brandFilterSearch.isVisible()) {
             brandFilterSearch.scrollIntoViewIfNeeded();
             brandFilterSearch.fill(BrandName);
             brandFilterSearch.blur();
-        } else {
-            Locator brandFilter = page.locator("xpath=//fieldset/div/div/button[contains(text(),\"Show all\")]").last();
-            brandFilter.scrollIntoViewIfNeeded();
-            brandFilter.click();
+        } else if (brandFilterShowAllBtn.isVisible()) { // Not by search or search not exist, find show all button
+            brandFilterShowAllBtn.scrollIntoViewIfNeeded();
+            brandFilterShowAllBtn.click();
         }
 
-        String targetXpath = "xpath=//label[text()=\"" + BrandName + "\"]";
-        Locator filterOption = page.locator(targetXpath);
-        filterOption.scrollIntoViewIfNeeded();
-        filterOption.click();
+        // After filter is searched or Show All button is click, find the target
+        // category checkbox to check
+        if (brandFilterCheckList.isVisible()) {
+            brandFilterCheckList.scrollIntoViewIfNeeded();
+            brandFilterCheckList.click();
+        }
+
+        // if (bySearch) {
+        // Locator brandFilterSearch = page.locator("#searchInput").last();
+        // brandFilterSearch.scrollIntoViewIfNeeded();
+        // brandFilterSearch.fill(BrandName);
+        // brandFilterSearch.blur();
+        // } else {
+        // Locator brandFilter =
+        // page.locator("xpath=//fieldset/div/div/button[contains(text(),\"Show
+        // all\")]").last();
+        // brandFilter.scrollIntoViewIfNeeded();
+        // brandFilter.click();
+        // }
+
+        // String targetXpath = "xpath=//label[text()=\"" + BrandName + "\"]";
+        // Locator filterOption = page.locator(targetXpath);
+        // filterOption.scrollIntoViewIfNeeded();
+        // filterOption.click();
     }
 
     public static void addItem(Page page, String targetItemName) {
