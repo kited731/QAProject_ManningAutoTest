@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType.LaunchOptions;
-import com.microsoft.playwright.FrameLocator;
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.AriaRole;
@@ -16,7 +14,7 @@ import com.microsoft.playwright.options.AriaRole;
 //Try Push
 public class LoginTest {
     @Test
-    public void Main() {
+    public void Login() {
         System.out.println("In Login");
 
         // Initialize Personal Details
@@ -57,16 +55,17 @@ public class LoginTest {
             page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Please provide password")).click();
             page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Please provide password"))
                     .fill(password);
+
             HandleCaptcha.clickCaptchaTextbox(page);
+            
+            page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName("Remember me")).check();
             page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Login")).click();
+            
+            HandleOTP.clickOTPtextbox(page);
 
-            page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("OTP Required")).click();
-            // Pause for the OTP input
-            page.pause();
-
-            page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Verify Account")).click();
-
+            page.waitForTimeout(waitForTimeout);
             HandleRestoreShoppingCart.restoreShoppingCart(page);
+            
             // assertTrue(page.isVisible("#user-profile-icon"), "User profile icon should be visible after login.");
             page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("My account")).click();
 
