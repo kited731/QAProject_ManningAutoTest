@@ -27,21 +27,7 @@ public class ClickNCollectTest {
         String floor = faker.number().randomDigitNotZero() + "/F";
         String countryCode = "+852";
         String mobile = "61235123";
-
-        switch (regionCode) {
-            case 0:
-                region = "Hong Kong Island";
-                break;
-            case 1:
-                region = "Kowloon";
-                break;
-            case 2:
-                region = "New Territories";
-                break;
-            default:
-                region = "Hong Kong Island";
-                break;
-        }
+        
         System.out.println("email is : " + email);
         System.out.println("Full Name is : " + fullName);
         System.out.println("Region is : " + region);
