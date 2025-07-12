@@ -56,9 +56,9 @@ public class RegistrationManningTest {
       closeDMP.click();
     //   Locator shopLocator = page.getByText("OL");
     //   shopLocator.click();
+      page.pause();
       Locator createanaccount = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create an account"));
       createanaccount.click();
-      page.pause();
       // Close Playwright =================
       playwright.close();
 
