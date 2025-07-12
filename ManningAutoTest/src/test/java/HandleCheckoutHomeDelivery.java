@@ -72,8 +72,8 @@ public class HandleCheckoutHomeDelivery {
 
         subtotalSpan.first().scrollIntoViewIfNeeded();
 
-        if (subTotalPrice > 399) {
-            System.out.println("In > 399");
+        if (subTotalPrice >= 399) {
+            System.out.println("In >= 399");
             Locator freeShippingLabel = page.locator(freeShipingXpath);
             PlaywrightAssertions.assertThat(freeShippingLabel).containsText("Free");
         } else {

@@ -38,7 +38,6 @@ public class CheckoutMemberTest {
 
         // Add try-catch-finally for playwright
         try {
-
             page.navigate("https://www.mannings.com.hk/en");
             page.waitForTimeout(waitForTimeout * 2);
             HandlePopUp.closeCookiesPopUp(page);

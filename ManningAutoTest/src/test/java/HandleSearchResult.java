@@ -1,3 +1,5 @@
+import java.util.List;
+
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.assertions.PlaywrightAssertions;
@@ -9,32 +11,11 @@ public class HandleSearchResult {
         PlaywrightAssertions.assertThat(page.locator("xpath=//div[contains(@class,\"searchPage-searchHeader-o8F\")]"))
                 .containsText(keywordSearched);
 
-        // System.out.println(page.locator("xpath=//div[contains(@class,\"searchPage-searchHeader-o8F\")]").textContent());
-
         PlaywrightAssertions.assertThat(page.locator(
                 "xpath=//div[contains(@class,\"breadcrumbs-root-MTL\")]/span[contains(@class,\"breadcrumbs-text\")][2]"))
                 .hasText("Search");
 
-        // Find all the search result of the page
-        Locator searchResultItems = page
-                .locator("xpath=//div[contains(@class,\"item-root\")]/a[2]/div[contains(@class,\"item-name\")]");
-
-        Locator targetItem = null;
-
-        for (int i = 0; i < searchResultItems.count(); i++) {
-            // System.out.println(searchResultItems.nth(i).textContent());
-            if (searchResultItems.nth(i).textContent().equals(targetItemName)) {
-                targetItem = searchResultItems.nth(i);
-                break;
-            }
-        }
-
-        if (targetItem != null) {
-            targetItem.scrollIntoViewIfNeeded();
-            targetItem.hover();
-            targetItem.click();
-            page.waitForTimeout(3000);
-        }
+        searchItemAllPages(page, targetItemName);
     }
 
     public static void filterCategories(Page page, String CategoryName, Boolean bySearch) {
@@ -117,5 +98,66 @@ public class HandleSearchResult {
             targetItem.click();
             page.waitForTimeout(3000);
         }
+    }
+
+    public static void searchItemAllPages(Page page, String targetItemName) {
+        // Find out how many total items
+        String totalItemTitleText = page.locator("xpath=//div[@class=\"liveSearchPLP-totalPages-3Ew\"]").innerText();
+        int totalItems = Integer.parseInt(totalItemTitleText.substring(0, totalItemTitleText.indexOf(" ")));
+        System.out.println("There is a total of " + totalItems + " items.");
+
+        // Find the pagination drop down
+        Locator paginationOption = page.locator(
+                "xpath=//div[contains(@class,\"pagination-perPageWrapper\")]/div[contains(@class,\"pagination-perPageWrapperInner\")]")
+                .first();
+        paginationOption.scrollIntoViewIfNeeded();
+
+        if (totalItems >= 64) { // change pagination to 64 per page
+            paginationOption.click();
+            page.locator("xpath=//div/div[@role=\"listbox\"]/div[contains(text(),\"64 Per Page\")]").click();
+            page.waitForTimeout(5000);
+        } else if (totalItems > 12 && totalItems <= 36) { // change pagination to 36 per page
+            paginationOption.click();
+            page.locator("xpath=//div/div[@role=\"listbox\"]/div[contains(text(),\"36 Per Page\")]").click();
+            page.waitForTimeout(5000);
+        } // no need to change pagination for items count less than or equal to 12
+
+        // Find the next page button
+        Locator nextPageBtn = page.locator("xpath=//button[@aria-label=\"move to the next page\"]").first();
+
+        List<Locator> searchResultItems = page.locator(
+                "xpath=//div[contains(@class,\"liveSearchPLP-items-gFg\")]/div[contains(@class,\"product-list-item\")]/a[2]/div[1]")
+                .all();
+
+        boolean itemIsFound = false;
+
+        do {
+            // Scan through all the item name to see if it matches
+            for (Locator item : searchResultItems) {
+                if (item.textContent().equals(targetItemName)) {
+                    itemIsFound = true;
+                    item.scrollIntoViewIfNeeded();
+                    page.waitForTimeout(3000);
+                    item.click();
+                    break;
+                }
+            }
+
+            if (itemIsFound) {
+                break;
+            } else if (!nextPageBtn.isDisabled()) {
+                nextPageBtn.click();
+                page.waitForTimeout(5000);
+                // Update item list from new page
+                searchResultItems = page.locator(
+                        "xpath=//div[contains(@class,\"liveSearchPLP-items-gFg\")]/div[contains(@class,\"product-list-item\")]/a[2]/div[1]")
+                        .all();
+            } else if (nextPageBtn.isDisabled() && !itemIsFound) {
+                System.out.println("Item Not Found");
+                break;
+            }
+
+        } while (!nextPageBtn.isDisabled() || !itemIsFound);
+
     }
 }

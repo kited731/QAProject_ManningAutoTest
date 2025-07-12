@@ -15,10 +15,26 @@ public class MainTest {
         System.out.println("In Main");
 
         // Initialize Search keywords
+
+        // Case 1 (First Page)
         String searchKeyword = "Lozenge";
         String targetProduct = "Strepsils Sugarfree Lemon Lozenge 16pcs";
         String targetProductCategory = "Throat";
         String targetProductBrand = "Strepsils";
+
+        // Case 2 (5th Page)
+        // String searchKeyword = "Lotion";
+        // String targetProduct = "Avene Gentle Cleansing Foam 150ml";
+        // String targetProductCategory = "Derma Cosmetics";
+        // String targetProductBrand = "Avene";
+
+        // Case 3 Last Page (7th Page)
+        // String searchKeyword = "Lotion";
+        // String targetProduct = "KAHI Wrinkle Bounce Multi Balm Set (Balm 9g + Mask
+        // 1pc)";
+        // String targetProductCategory = "Moisturiser";
+        // String targetProductBrand = "KAHI";
+
         int purchaseQuantity = 2;
 
         // Settings
