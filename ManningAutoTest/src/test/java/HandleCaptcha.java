@@ -9,12 +9,12 @@ public class HandleCaptcha {
 
         Locator captcha = page.locator("iframe[title=\"mtcaptcha\"]").contentFrame().getByRole(AriaRole.TEXTBOX,
                 new FrameLocator.GetByRoleOptions().setName("enter text from captcha to"));
+
         if (captcha.isVisible()) {
             captcha.click();
+            // Pause for the captcha input
+            page.pause();
         }
-
-        // Pause for the captcha input
-        page.pause();
 
     }
 }
