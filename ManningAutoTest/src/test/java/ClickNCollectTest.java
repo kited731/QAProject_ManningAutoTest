@@ -1,4 +1,3 @@
-
 import org.junit.jupiter.api.Test;
 
 import com.github.javafaker.Faker;
@@ -27,7 +26,7 @@ public class ClickNCollectTest {
         String floor = faker.number().randomDigitNotZero() + "/F";
         String countryCode = "+852";
         String mobile = "61235123";
-        
+
         System.out.println("email is : " + email);
         System.out.println("Full Name is : " + fullName);
         System.out.println("Region is : " + region);

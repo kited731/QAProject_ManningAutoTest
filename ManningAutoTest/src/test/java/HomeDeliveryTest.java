@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import com.github.javafaker.Faker;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Locator;
@@ -13,6 +14,17 @@ public class HomeDeliveryTest {
     public void testManningsThroatWesternPage() {
         Browser browser = Playwright.create().chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(2000));
         Page page = browser.newPage();
+
+                Faker faker = new Faker();
+        String email = faker.name().firstName() + "_" + faker.name().lastName() + "@gmail.com";
+        String fullName = faker.name().firstName() + " " + faker.name().lastName();
+        int regionCode = faker.number().numberBetween(0, 2);
+        String countryCode = "+852";
+       
+        System.out.println("email is : " + email);
+        System.out.println("Full Name is : " + fullName);
+        System.out.println("Country Code is : " + countryCode);
+
 
         try (Playwright playwright = Playwright.create()) {
             page.navigate("https://www.mannings.com.hk/en/strepsils-sugarfree-lemon-lozenge-16pcs/p/492595");
@@ -28,8 +40,8 @@ public class HomeDeliveryTest {
             page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Checkout securely")).click();
             page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Guest checkout")).click();
             page.locator("xpath=//input[@id='email']").click();
-            page.locator("xpath=//input[@id='email']").fill("abc@gmail.com");
-            page.locator("xpath=//input[@id='firstname']").fill("John Doe");
+            page.locator("xpath=//input[@id='email']").fill(email);
+            page.locator("xpath=//input[@id='firstname']").fill(fullName);
             page.locator("xpath=//div[contains(@class,\"guestForm-region\")]").click();
             page.getByText("Kowloon").click();
             Locator districtInput = page.locator("#region-root-k7a");
