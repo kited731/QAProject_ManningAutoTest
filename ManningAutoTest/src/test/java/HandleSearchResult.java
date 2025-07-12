@@ -94,24 +94,6 @@ public class HandleSearchResult {
             brandFilterCheckList.scrollIntoViewIfNeeded();
             brandFilterCheckList.click();
         }
-
-        // if (bySearch) {
-        // Locator brandFilterSearch = page.locator("#searchInput").last();
-        // brandFilterSearch.scrollIntoViewIfNeeded();
-        // brandFilterSearch.fill(BrandName);
-        // brandFilterSearch.blur();
-        // } else {
-        // Locator brandFilter =
-        // page.locator("xpath=//fieldset/div/div/button[contains(text(),\"Show
-        // all\")]").last();
-        // brandFilter.scrollIntoViewIfNeeded();
-        // brandFilter.click();
-        // }
-
-        // String targetXpath = "xpath=//label[text()=\"" + BrandName + "\"]";
-        // Locator filterOption = page.locator(targetXpath);
-        // filterOption.scrollIntoViewIfNeeded();
-        // filterOption.click();
     }
 
     public static void addItem(Page page, String targetItemName) {
