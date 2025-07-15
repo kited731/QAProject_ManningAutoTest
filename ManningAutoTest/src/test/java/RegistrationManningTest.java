@@ -1,10 +1,15 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitUntilState;
 
@@ -111,38 +116,78 @@ public class RegistrationManningTest {  @Test
     }
   }
 
-  public void inputFirstName(Page page, String firstName){
+  public static void inputFirstName(Page page, String firstName){
+    final Pattern pattern = Pattern.compile("^[a-zA-Z]\\s");
+    final Matcher matcher = pattern.matcher(firstName);
     Locator fillFirstName = page.locator("#firstName");
     fillFirstName.fill(firstName);
-    Locator fillFirstNameError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
-    switch (fillOption) {
-      case 1: //Fill Correct in First Name Field
-        firstName = "Test";
-        fillFirstName.fill(firstName);
-        break;
-        case 2: //Fill . in First Name Field
-          firstName = ".";
-          fillFirstNameError.getByText("This field can't be empty or input number/special characters");
-          System.out.println("First Name shows error");
-          break;
-        case 3; //Fill space in First Name Field
-          firstName = " ";
-          fillFirstNameError.getByText("This field can't be empty or input number/special characters");
-          System.out.println("First Name shows error");
-          break;
-        case 4: //Fill emty in First Name Field
-          firstName = null;
-          fillFirstNameError.getByText("This field can't be empty or input number/special characters");
-          System.out.println("First Name shows error");
-          break;
-      default:
-        break;
+    if (firstName.isEmpty() || matcher.matches() == false){
+      fillFirstName.blur();
+      Locator fillFirstNameError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
+      PlaywrightAssertions.assertThat(fillFirstNameError).hasText("This field can't be empty or input number/special characters");
+    } else {
+      fillFirstName.blur();
+    }
+   }
+
+  public static void inputLastName(Page page, String lastName){
+    final Pattern pattern = Pattern.compile("^[a-zA-Z]\\s");
+    final Matcher matcher = pattern.matcher(lastName);
+    Locator fillLastName = page.locator("#lastName");
+    fillLastName.fill(lastName);
+    if (lastName.isEmpty() || matcher.matches() == false){
+      fillLastName.blur();
+      Locator fillLastNameError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
+      PlaywrightAssertions.assertThat(fillLastNameError).hasText("This field can't be empty or input number/special characters");
+    } else {
+      fillLastName.blur();
+    }
+   }
+
+  public static void inputemailAddress(Page page, String emailaddress) {
+    final Pattern pattern = Pattern.compile("^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6})$");
+    final Matcher matcher = pattern.matcher(emailaddress);
+    Locator fillEmail = page.locator("#Email");
+    fillEmail.fill(emailaddress);
+    if (emailaddress.isEmpty() || matcher.matches() == false){
+      fillEmail.blur();
+      Locator fillEmailError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
+      PlaywrightAssertions.assertThat(fillEmailError).hasText("Please enter a valid email addres");
+    } else {
+      fillEmail.blur();
+    }
+   }
+
+  public static void selectCountryCode(Page page, String countrycode) {
+    Locator fillPhoneID = page.locator("#countryCode").nth(0);
+    fillPhoneID.click();
+
+    // Way 2
+    if (countrycode.equals("+852")) {
+      page.getByText("+852").click();
+    } else if (countrycode.equals("+853")) {
+      page.getByText("+853").click();
+    } else if (countrycode.equals("+86")) {
+      page.getByText("+86").click();
+    } else {
+      page.getByText("+852").click();
     }
   }
 
-  public void inputLastName() {
-
-  }
+  //   public static void inputPhoneNumber(Page page, Number phone) {
+    
+  //   final Pattern pattern = Pattern.compile("^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6})$");
+  //   final Matcher matcher = pattern.matcher(phone);
+  //   Locator fillEmail = page.locator("#Email");
+  //   fillEmail.fill(emailaddress);
+  //   if (emailaddress.isEmpty() || matcher.matches() == false){
+  //     fillEmail.blur();
+  //     Locator fillEmailError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
+  //     PlaywrightAssertions.assertThat(fillEmailError).hasText("Please enter a valid email addres");
+  //   } else {
+  //     fillEmail.blur();
+  //   }
+  // }
 
   public void inputPassword(Page page, String originalPassword, String confirmPassword) {
     // 123456 pw
