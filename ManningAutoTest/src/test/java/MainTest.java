@@ -80,6 +80,11 @@ public class MainTest {
             HandleProductDetailPage.AddProductToCart(page, targetProduct, purchaseQuantity);
             HandleShoppingCart.goToShoppingCart(page);
 
+            // PaymentMethod.selectPaymentMethod(page, 1);
+
+            // RegistrationManningTest.selectTitle(page, "Mr");
+            // RegistrationManningTest.selectTitle(page, 2);
+
         } // catch (Exception e) {
           // System.out.println(e.getMessage());
           // }

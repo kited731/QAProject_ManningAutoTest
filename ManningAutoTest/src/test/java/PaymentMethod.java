@@ -18,8 +18,7 @@ public class PaymentMethod {
     public void testManningsThroatWesternPage() {
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(
-                    new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(2000)
-            );
+                    new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(2000));
             // Create incognito context
             try (BrowserContext context = browser.newContext()) {
                 Page page = context.newPage();
@@ -28,24 +27,29 @@ public class PaymentMethod {
                 page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("I understand")).click();
                 page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Add to cart")).nth(0).click();
                 page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Increase Quantity")).click();
-                page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Toggle mini cart. You have 2")).click();
-                page.locator(".deliveryMethod-item_content--Fx > div:nth-child(3) > .icon-root-W-v > svg").first().click();
+                page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Toggle mini cart. You have 2"))
+                        .click();
+                page.locator(".deliveryMethod-item_content--Fx > div:nth-child(3) > .icon-root-W-v > svg").first()
+                        .click();
                 page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Increase Quantity")).click();
                 page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Checkout securely")).click();
                 page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Guest checkout")).click();
                 page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter location")).click();
-                page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter location")).fill("Lai Chi Kok");
+                page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter location"))
+                        .fill("Lai Chi Kok");
                 page.locator(".storeCollect-radioGroup-hz8 > .icon-root-W-v > svg").first().click();
                 page.locator("input[name=\"firstName\"]").click();
                 page.locator("input[name=\"firstName\"]").fill("John Doe");
-                page.locator("form").filter(new Locator.FilterOptions().setHasText("Full NameEmailCountry")).locator("input[name=\"email\"]").click();
-                page.locator("form").filter(new Locator.FilterOptions().setHasText("Full NameEmailCountry")).locator("input[name=\"email\"]").fill("abc@gmail.com");
+                page.locator("form").filter(new Locator.FilterOptions().setHasText("Full NameEmailCountry"))
+                        .locator("input[name=\"email\"]").click();
+                page.locator("form").filter(new Locator.FilterOptions().setHasText("Full NameEmailCountry"))
+                        .locator("input[name=\"email\"]").fill("abc@gmail.com");
                 page.locator("#areaCode div").nth(4).click();
                 page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName("+852")).click();
                 page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Mobile number")).click();
                 page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Mobile number")).fill("61236123");
                 page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Confirm Details")).click();
-                //PaymentMehod starts here
+                // PaymentMehod starts here
                 // 1 = alipayHK
                 // 2 = Visa
                 // 3 = alipayCN
@@ -95,5 +99,40 @@ public class PaymentMethod {
                 page.pause();
             }
         }
+    }
+
+    public static void selectPaymentMethod(Page page, int paymentOptions) {
+        switch (paymentOptions) {
+            case 1:
+                page.locator("#paymentMethod--alipay_hk").first().click();
+                break;
+            case 2:
+                page.locator("#paymentMethod--chcybersource").first().click();
+                break;
+            case 3:
+                page.locator("#paymentMethod--alipay_cn").first().click();
+                break;
+            case 4:
+                page.locator("#paymentMethod--payme").first().click();
+                break;
+            case 5:
+                page.locator("#paymentMethod--octopus").first().click();
+                break;
+            case 6:
+                page.locator("#paymentMethod--wechatpay_hk").first().click();
+                break;
+        }
+    }
+
+    public static void confirmCheckout(Page page) {
+        page.waitForTimeout(5000);
+        page.locator("xpath=//*[name()='path' and contains(@d,'M4 5a1 1 0')]").click(); // Agree T&C checkbox
+        page.locator("xpath=//span[normalize-space()='Pay Now']").click(); // Pay now button
+    }
+
+    public static void cancelTransaction(Page page) {
+        page.waitForTimeout(5000);
+        page.locator("xpath=//td/button[text()=\"Cancel Transaction\"]").click();
+        page.locator("xpath=//a[@class=\"am-dialog-button\"][text()=\"Yes\"]").click();
     }
 }
