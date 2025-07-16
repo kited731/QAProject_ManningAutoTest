@@ -64,7 +64,7 @@ public class PaymentTest {
         String email = "abc@gmail.com";
         String fullname = "John Doe";
         String mobile = "61236123";
-        ClickNCollectTest.InputCheckOutInfo(page, email, fullname, mobile);
+        ClickNCollectTest.CNCInputCheckOutInfo(page, email, fullname, mobile);
         // HandlePopUp.closePromotionPopUp(page);
         // HandlePopUp.closeCookiesPopUp(page);
         PaymentMethod.selectPaymentMethod(page, 1);
