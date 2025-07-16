@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
@@ -18,7 +19,10 @@ public class CheckoutMemberCollectTest {
         // String targetProductMainCategory = "Hair";
         // String targetProductSubCategory = "Shampoo";
         // String targetProductBrand = "Maro";
-        int purchaseQuantity = 2;
+        int minQuantity = 1;
+        int maxQuantity = 40;
+        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity); // random between 1 and 40
+                                                                                            // inclusive
 
         // Settings
         int clickInteval = 1000;
@@ -58,7 +62,7 @@ public class CheckoutMemberCollectTest {
 
             HandleCheckoutCollect.selectCollect(page);
             // HandleCheckoutHomeDelivery.increaseQty(page, 1);
-            HandleCheckoutHomeDelivery.updateToQty(page, 10);
+            HandleCheckoutHomeDelivery.updateToQty(page, updateQuantity);
             // HandleCheckoutHomeDelivery.applyCouponCode(page, "25SHOP40");
 
             page.waitForTimeout(waitForTimeout);

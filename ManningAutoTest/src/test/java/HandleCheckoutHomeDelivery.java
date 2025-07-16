@@ -58,15 +58,14 @@ public class HandleCheckoutHomeDelivery {
 
     public static void verifyDeliveryFee(Page page) {
         Locator subtotalSpan = page.locator(
-                "xpath=//div[@class=\"summary-fee_wrapper-Bgk\"]/div[text()=\"Subtotal\"]/following-sibling::div/span");
+                // "xpath=//div[@class=\"summary-fee_wrapper-Bgk\"]/div[text()=\"Subtotal\"]/following-sibling::div/span");
+                "xpath=(//div[@class='summary-fee_wrapper-Bgk']//div)[2]");
 
         String freeShipingXpath = "xpath=//div[@class=\"summary-fee_wrapper-Bgk\"]/div[text()=\"Delivery fee\"]/following-sibling::div";
         String nonFreeShippingXpath = "xpath=//div[@class=\"summary-fee_wrapper-Bgk\"]/div[text()=\"Delivery fee\"]/following-sibling::div/span";
-
-        String subTotalStr = subtotalSpan.nth(1).innerText()
-                + subtotalSpan.nth(2).innerText()
-                + subtotalSpan.nth(3).innerText();
-        double subTotalPrice = Double.parseDouble(subTotalStr);
+        
+        String subTotalStr = subtotalSpan.innerText();
+        double subTotalPrice = Double.parseDouble(subTotalStr.replace("$", "").replace(",", "").trim());
 
         System.out.println("Subtotal is: " + subTotalPrice);
 
