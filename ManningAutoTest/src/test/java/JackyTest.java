@@ -16,9 +16,12 @@ public class JackyTest {
     page.navigate("https://www.mannings.com.hk/en/register");
     Locator closeUnderstand = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("I understand"));
     closeUnderstand.click();
-    Locator fillFirstName = page.locator("#firstName");
-    String teststring1 = "2";
-    RegistrationManningTest.inputFirstName(page, teststring1);   
+    //Locator fillFirstName = page.locator("#firstName");
+    String teststring = "Lee";
+    RegistrationManningTest.inputFirstName(page, teststring); 
+    //String teststring = "lam@gmail.com";
+    //RegistrationManningTest.createanaccount(page);
+    page.pause();
 }
 
 }
