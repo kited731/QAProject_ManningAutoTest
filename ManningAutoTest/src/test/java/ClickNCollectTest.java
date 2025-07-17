@@ -1,4 +1,4 @@
-
+//ClickNCollect>CNC
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -80,7 +80,7 @@ public class ClickNCollectTest {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Guest checkout")).click();
     }
 
-    public static void InputCheckOutInfo(Page page, String email, String fullname, String mobile) {
+    public static void CNCInputCheckOutInfo(Page page, String email, String fullname, String mobile) {
         // Faker faker = new Faker();
         //   String fullName = faker.name().firstName() + " " + faker.name().lastName();
         // int regionCode = faker.number().numberBetween(0, 2);
