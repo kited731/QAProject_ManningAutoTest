@@ -21,8 +21,8 @@ public class CheckoutMemberCollectTest {
         // String targetProductBrand = "Maro";
         int minQuantity = 1;
         int maxQuantity = 40;
-        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity); // random between 1 and 40
-                                                                                            // inclusive
+        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity + 1); // random between 1 and
+                                                                                                // 40 inclusive
 
         // Settings
         int clickInteval = 1000;

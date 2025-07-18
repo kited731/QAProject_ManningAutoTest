@@ -22,7 +22,7 @@ public class CheckoutMemberTest {
         int purchaseQuantity = 2;
         int minQuantity = 1;
         int maxQuantity = 40;
-        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity); // random between 1 and 40
+        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity + 1); // random between 1 and 40
 
         // Settings
         int clickInteval = 1000;
