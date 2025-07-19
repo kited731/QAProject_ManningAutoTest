@@ -1,0 +1,109 @@
+{
+  "PurchaseTestCase": [
+    {
+      "TestCaseID": "GP-001",
+      "ProductTestData": {
+        "ProductName": "Strepsils Sugarfree Lemon Lozenge 16pcs",
+        "Category": "Throat",
+        "isSearchCategory": false,
+        "Brand": "Strepsils",
+        "isSearchBrand": true,
+        "SearchKeyword": "Lozenge",
+        "PurchaseQty": 2,
+        "SearchMode": 1
+      },
+      "DeliveryTestData": {
+        "isHomeDelivery": true,
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": true,
+          "IsUpdateQty": true,
+          "newQty": 20,
+          "Email": "abc@abc.com",
+          "FullName": "abc",
+          "Region": "Kowloon",
+          "District": "Cheung Sha Wan",
+          "StreetNumber": 123,
+          "Building": "asd",
+          "Unit": "5/F 504",
+          "CountryCode": 852,
+          "Mobile": 61235123
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "",
+          "ResultPreference": 0
+        }
+      },
+      "PaymentOptions": 1
+    },
+    {
+      "TestCaseID": "GP-002",
+      "ProductTestData": {
+        "ProductName": "Avene Gentle Cleansing Foam 150ml",
+        "Category": "Derma Cosmetics",
+        "isSearchCategory": false,
+        "Brand": "Avene",
+        "isSearchBrand": true,
+        "SearchKeyword": "Lotion",
+        "PurchaseQty": 2,
+        "SearchMode": 1
+      },
+      "DeliveryTestData": {
+        "isHomeDelivery": false,
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": true,
+          "IsUpdateQty": true,
+          "newQty": 20,
+          "Email": "abc@abc.com",
+          "FullName": "abc",
+          "Region": "Kowloon",
+          "District": "Cheung Sha Wan",
+          "StreetNumber": 123,
+          "Building": "asd",
+          "Unit": "5/F 504",
+          "CountryCode": 852,
+          "Mobile": 61235123
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "",
+          "ResultPreference": 1
+        }
+      },
+      "PaymentOptions": 1
+    },
+    {
+      "TestCaseID": "GP-003",
+      "ProductTestData": {
+        "ProductName": "KAHI Wrinkle Bounce Multi Balm Set (Balm 9g + Mask 1pc)",
+        "Category": "Moisturiser",
+        "isSearchCategory": true,
+        "Brand": "KAHI",
+        "isSearchBrand": false,
+        "SearchKeyword": "Lotion",
+        "PurchaseQty": 2,
+        "SearchMode": 1
+      },
+      "DeliveryTestData": {
+        "isHomeDelivery": false,
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": true,
+          "IsUpdateQty": true,
+          "newQty": 20,
+          "Email": "abc@abc.com",
+          "FullName": "abc",
+          "Region": "Kowloon",
+          "District": "Cheung Sha Wan",
+          "StreetNumber": 123,
+          "Building": "asd",
+          "Unit": "5/F 504",
+          "CountryCode": 852,
+          "Mobile": 61235123
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "",
+          "ResultPreference": 1
+        }
+      },
+      "PaymentOptions": 1
+    }
+  ]
+}

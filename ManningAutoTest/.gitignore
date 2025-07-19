@@ -36,3 +36,14 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### User Login Data ###
+/user-data/login
+/user-data/
+
+### Test Case Recordings ###
+/recording
+
+### Recording and Screencap ###
+/reports
+/screenshots

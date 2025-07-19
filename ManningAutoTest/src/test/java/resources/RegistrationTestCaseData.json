@@ -1,0 +1,30 @@
+{
+  "RegistrationTestCase": [
+    {
+      "TestCaseID": "RG-001",
+      "RegistrationTestData": {
+        "Title": "Mr",
+        "FirstName": "ABC",
+        "LastName": "CDE",
+        "Email": "abc@cde.com",
+        "CountryCode": "+852",
+        "Mobile": "61235123",
+        "Password": "aaabbb111",
+        "PasswordConfirm": "aaabbb111"
+      }
+    },
+    {
+      "TestCaseID": "RG-002",
+      "RegistrationTestData": {
+        "Title": "Mr",
+        "FirstName": "ABC",
+        "LastName": "CDE",
+        "Email": "abc@cde.com",
+        "CountryCode": "+852",
+        "Mobile": "61235123",
+        "Password": "aaabbb111",
+        "PasswordConfirm": "aaabbb111"
+      }
+    }
+  ]
+}
