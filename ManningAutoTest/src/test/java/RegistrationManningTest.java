@@ -1,13 +1,19 @@
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitUntilState;
 
-public class RegistrationManningTest {
-  @Test
+public class RegistrationManningTest {  @Test
   void contextLoads() {
     Playwright playwright = Playwright.create();
     BrowserType browserType = playwright.chromium();
@@ -59,7 +65,7 @@ public class RegistrationManningTest {
     // shopLocator.click();
     page.pause();
     Locator createanaccount = page.getByRole(AriaRole.BUTTON,
-        new Page.GetByRoleOptions().setName("Create an account"));
+    new Page.GetByRoleOptions().setName("Create an account"));
     createanaccount.click();
     // Close Playwright =================
     playwright.close();
@@ -94,11 +100,6 @@ public class RegistrationManningTest {
     Locator fillTitle = page.locator("#title");
     fillTitle.click();
 
-    // Way 1
-    // Locator targetLocator = page.getByText(title);
-    // targetLocator.click();
-
-    // Way 2
     if (title.equals("Mr")) {
       page.getByText("Mr").click();
     } else if (title.equals("Mrs")) {
@@ -110,16 +111,132 @@ public class RegistrationManningTest {
     }
   }
 
-  public void inputFirstName() {
+  public static void inputFirstName(Page page, String firstName){
+    String regex = "^[A-Z][a-zA-Z' -]{1,}$";
+    Locator fillFirstName = page.locator("#firstName");
+    if (firstName.matches(regex)){
+      fillFirstName.fill(firstName);
+      page.pause();
+    } else {
+      Locator fillFirstNameError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
+      PlaywrightAssertions.assertThat(fillFirstNameError).hasText("This field can't be empty or input number/special characters");
+    }
+   }
+
+  public static void inputLastName(Page page, String lastName){
+    String regex = "^[A-Z][a-zA-Z' -]{1,}$";
+    Locator fillLastName = page.locator("#lastName");
+    if (lastName.matches(regex)){
+      fillLastName.fill(lastName);
+      page.pause();
+    } else {
+      Locator fillFirstNameError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
+      PlaywrightAssertions.assertThat(fillFirstNameError).hasText("This field can't be empty or input number/special characters");
+    }
+   }
+
+  public static void inputemailAddress(Page page, String emailaddress) {
+    String regex = "^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6})$";
+    Locator fillEmail = page.locator("#Email");
+    if (emailaddress.matches(regex)){
+      fillEmail.fill(emailaddress);
+      page.pause();
+    } else {
+      Locator fillEmailError = page.locator("xpath= //p[@class='message-root_error-UMR message-root-PRA font-normal leading-none mt-1 text-colorDefault text-xs text-left leading-4 font-semibold text-error']");
+      PlaywrightAssertions.assertThat(fillEmailError).hasText("Please enter a valid email addres");
+    }
+   }
+
+  public static void selectHKphone(Page page, String countrycode, String phonenNumber) {
+    Locator fillPhoneID = page.locator("#countryCode").nth(0);
+    Locator fillPhoneNum = page.locator("#telephone");
+    String regex = "^[2-9]\\d{7}$";
+
+    if (countrycode.equals("+852") && phonenNumber.matches(regex)) {
+      fillPhoneID.click();
+      Locator fillPhoneID1 = page.getByText("+852");
+      fillPhoneID1.click();
+      page.getByText("+852");
+      fillPhoneNum.fill(phonenNumber);
+    }  else {
+      Locator mcphoenError = page.locator("xpath= //p[normalize-space()='Please enter a valid mobile number']");
+      PlaywrightAssertions.assertThat(mcphoenError).hasText("Please enter a valid mobile number");
+    }
+  }
+    public static void selectMCphone(Page page, String countrycode, String phonenNumber) {
+    Locator fillPhoneID = page.locator("#countryCode").nth(0);
+    Locator fillPhoneNum = page.locator("#telephone");
+    String regex = "^[2-9]\\d{7}$";
+
+    if (countrycode.equals("+853") && phonenNumber.matches(regex)) {
+      fillPhoneID.click();
+      Locator fillPhoneID1 = page.getByText("+853");
+      fillPhoneID1.click();
+      page.getByText("+853");
+      fillPhoneNum.fill(phonenNumber);
+    }  else {
+      Locator mcphoenError = page.locator("xpath= //p[normalize-space()='Please enter a valid mobile number']");
+      PlaywrightAssertions.assertThat(mcphoenError).hasText("Please enter a valid mobile number");
+    }
+  }
+
+    public static void selectCNphone(Page page, String countrycode, String phonenNumber) {
+    Locator fillPhoneID = page.locator("#countryCode").nth(0);
+    Locator fillPhoneNum = page.locator("#telephone");
+    String regex = "^1[0-9]{10}$";
+
+    if (countrycode.equals("+86") && phonenNumber.matches(regex)) {
+      fillPhoneID.click();
+      Locator fillPhoneID1 = page.getByText("+86");
+      fillPhoneID1.click();
+      page.getByText("+86");
+      fillPhoneNum.fill(phonenNumber);
+    }  else {
+      Locator mcphoenError = page.locator("xpath= //p[normalize-space()='Please enter a valid mobile number']");
+      PlaywrightAssertions.assertThat(mcphoenError).hasText("Please enter a valid mobile number");
+    }
+  }
+  
+  public static void inputPassword(Page page, String originalPassword, String confirmPassword) {
+    Locator fillPassword = page.locator("#Password");
+    Locator ConfirmPassword = page.locator("#ConfirmPassword");
+    String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,20}$";
+    if (originalPassword.matches(regex) && originalPassword.equals(confirmPassword)) {
+      fillPassword.fill(originalPassword);
+      ConfirmPassword.fill(confirmPassword);
+      page.pause();
+    } else if (originalPassword != confirmPassword){
+      Locator passwordError = page.locator("xpath= //p[normalize-space()='Please enter the same password as above']");
+      PlaywrightAssertions.assertThat(passwordError).hasText("Please enter the same password as above");
+    } else {
+      Locator passwordError = page.locator("xpath= //p[contains(text(),'Password must contain minimum 6, maximum 20 charac')]");
+      PlaywrightAssertions.assertThat(passwordError).hasText("Password must contain minimum 6, maximum 20 character, at least one numeric and one alphabetic character");
+    }
 
   }
 
-  public void inputLastName() {
-
+  public static void clickTNC(Page page) {
+    Locator clickTnC = page.getByText("Terms & Conditions");
+    clickTnC.click();
+    Locator closeTCPop = page.locator("xpath=//*[name()='path' and contains(@d,'M15.172 2.')]");
+    closeTCPop.click();
   }
 
-  public void inputPassword(Page page, String originalPassword, String confirmPassword) {
-    // 123456 pw
-    // 234567 conf.pw
+  public static void subscribe(Page page) {
+    Locator registrationbox = page.locator("#subscribe");
+    registrationbox.click();
+  }
+
+  public static void directMarketingPurposes(Page page) {
+    Locator clickDMP = page.getByText("Direct Marketing purposes");
+    clickDMP.click();
+    Locator closeDMP = page.locator("xpath= //*[name()='path' and contains(@d,'M15.172 2.')]");
+    closeDMP.click();
+  }
+
+  public static void createanaccount(Page page) {
+    Locator createanaccount = page.getByRole(AriaRole.BUTTON,
+    new Page.GetByRoleOptions().setName("Create an account"));
+    createanaccount.click(); 
   }
 }

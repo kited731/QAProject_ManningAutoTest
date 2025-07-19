@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,9 @@ public class CheckoutMemberTest {
         String targetProductSubCategory = "Shampoo";
         String targetProductBrand = "Maro";
         int purchaseQuantity = 2;
+        int minQuantity = 1;
+        int maxQuantity = 40;
+        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity + 1); // random between 1 and 40
 
         // Settings
         int clickInteval = 1000;
@@ -63,7 +67,7 @@ public class CheckoutMemberTest {
             HandleShoppingCart.goToShoppingCart(page);
             HandleCheckoutHomeDelivery.selectDelivery(page);
             // HandleCheckoutHomeDelivery.increaseQty(page, 1);
-            HandleCheckoutHomeDelivery.updateToQty(page, 10);
+            HandleCheckoutHomeDelivery.updateToQty(page, updateQuantity);
             // HandleCheckoutHomeDelivery.applyCouponCode(page, "25SHOP40");
 
             page.waitForTimeout(waitForTimeout);
