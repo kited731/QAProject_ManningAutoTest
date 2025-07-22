@@ -1,8 +1,9 @@
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Page.GetByRoleOptions;
 import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import com.microsoft.playwright.options.AriaRole;
+
+import Util.HandleCheckoutHomeDelivery;
 
 public class HandleCheckoutCollect {
     public static void selectCollect(Page page) {
@@ -15,7 +16,7 @@ public class HandleCheckoutCollect {
     public static void verifyCollectFee(Page page) {
         Locator subtotalSpan = page.locator(
                 "xpath=(//div[@class='summary-fee_wrapper-Bgk']//div)[2]");
-        
+
         String freeCollectXpath = "xpath=//div[contains(@class,'deliveryMethod-content-i6x flex-col lg_flex-row')]/div[1]";
         String disabledCollectXpath = "xpath=//div[contains(@class,'deliveryMethod-item_disabled-fMj')]";
 

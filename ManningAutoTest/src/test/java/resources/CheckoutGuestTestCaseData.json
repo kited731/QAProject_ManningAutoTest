@@ -1,7 +1,7 @@
 {
   "PurchaseTestCase": [
     {
-      "TestCaseID": "GP-001",
+      "TestCaseID": "GST-001",
       "ProductTestData": {
         "ProductName": "Strepsils Sugarfree Lemon Lozenge 16pcs",
         "Category": "Throat",
@@ -9,101 +9,254 @@
         "Brand": "Strepsils",
         "isSearchBrand": true,
         "SearchKeyword": "Lozenge",
-        "PurchaseQty": 2,
+        "PurchaseQty": 3,
         "SearchMode": 1
       },
       "DeliveryTestData": {
+        "TestCaseID": "CNC-001",
         "isHomeDelivery": true,
+        "YuuID": "",
+        "CouponCode": "",
         "HomeDeliveryTestData": {
-          "IsUpdateAddress": true,
-          "IsUpdateQty": true,
-          "newQty": 20,
-          "Email": "abc@abc.com",
-          "FullName": "abc",
+          "IsUpdateAddress": false,
+          "IsUpdateQty": false,
+          "newQty": 4,
+          "Email": "abc@gmail.com",
+          "FullName": "John Doe",
           "Region": "Kowloon",
           "District": "Cheung Sha Wan",
-          "StreetNumber": 123,
-          "Building": "asd",
-          "Unit": "5/F 504",
-          "CountryCode": 852,
-          "Mobile": 61235123
+          "StreetNumber": "15 Abc Street",
+          "Building": "TF Building",
+          "Unit": "1503",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
         },
         "ClickAndCollectTestData": {
-          "SearchKeyword": "",
-          "ResultPreference": 0
+          "SearchKeyword": "Lai Chi Kok",
+          "PurchaseQty": 5,
+          "ResultPreference": 1,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
         }
       },
       "PaymentOptions": 1
     },
     {
-      "TestCaseID": "GP-002",
+      "TestCaseID": "GST-002",
       "ProductTestData": {
-        "ProductName": "Avene Gentle Cleansing Foam 150ml",
-        "Category": "Derma Cosmetics",
+        "ProductName": "Strepsils Sugarfree Lemon Lozenge 16pcs",
+        "Category": "Throat",
         "isSearchCategory": false,
-        "Brand": "Avene",
+        "Brand": "Strepsils",
         "isSearchBrand": true,
-        "SearchKeyword": "Lotion",
-        "PurchaseQty": 2,
+        "SearchKeyword": "Lozenge",
+        "PurchaseQty": 3,
         "SearchMode": 1
       },
       "DeliveryTestData": {
-        "isHomeDelivery": false,
+        "TestCaseID": "CNC-002",
+        "isHomeDelivery": true,
+        "YuuID": "",
+        "CouponCode": "",
         "HomeDeliveryTestData": {
           "IsUpdateAddress": true,
           "IsUpdateQty": true,
           "newQty": 20,
-          "Email": "abc@abc.com",
-          "FullName": "abc",
+          "Email": "abc@gmail.com",
+          "FullName": "John Doe",
           "Region": "Kowloon",
           "District": "Cheung Sha Wan",
-          "StreetNumber": 123,
-          "Building": "asd",
-          "Unit": "5/F 504",
-          "CountryCode": 852,
-          "Mobile": 61235123
+          "StreetNumber": "15 Abc Street",
+          "Building": "TF Building",
+          "Unit": "1503",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
         },
         "ClickAndCollectTestData": {
           "SearchKeyword": "",
-          "ResultPreference": 1
+          "PurchaseQty": 5,
+          "ResultPreference": 1,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
         }
       },
-      "PaymentOptions": 1
+      "PaymentOptions": 2
     },
     {
-      "TestCaseID": "GP-003",
+      "TestCaseID": "GST-003",
       "ProductTestData": {
-        "ProductName": "KAHI Wrinkle Bounce Multi Balm Set (Balm 9g + Mask 1pc)",
-        "Category": "Moisturiser",
-        "isSearchCategory": true,
-        "Brand": "KAHI",
-        "isSearchBrand": false,
-        "SearchKeyword": "Lotion",
-        "PurchaseQty": 2,
+        "ProductName": "Strepsils Sugarfree Lemon Lozenge 16pcs",
+        "Category": "Throat",
+        "isSearchCategory": false,
+        "Brand": "Strepsils",
+        "isSearchBrand": true,
+        "SearchKeyword": "Lozenge",
+        "PurchaseQty": 4,
         "SearchMode": 1
       },
       "DeliveryTestData": {
-        "isHomeDelivery": false,
+        "TestCaseID": "CNC-003",
+        "isHomeDelivery": true,
+        "YuuID": "",
+        "CouponCode": "",
         "HomeDeliveryTestData": {
           "IsUpdateAddress": true,
           "IsUpdateQty": true,
-          "newQty": 20,
-          "Email": "abc@abc.com",
-          "FullName": "abc",
+          "newQty": 13,
+          "Email": "abc@gmail.com",
+          "FullName": "John Doe",
           "Region": "Kowloon",
           "District": "Cheung Sha Wan",
-          "StreetNumber": 123,
-          "Building": "asd",
-          "Unit": "5/F 504",
-          "CountryCode": 852,
-          "Mobile": 61235123
+          "StreetNumber": "15 Abc Street",
+          "Building": "TF Building",
+          "Unit": "1503",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
         },
         "ClickAndCollectTestData": {
           "SearchKeyword": "",
-          "ResultPreference": 1
+          "PurchaseQty": 5,
+          "ResultPreference": 1,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
         }
       },
-      "PaymentOptions": 1
+      "PaymentOptions": 3
+    },
+    {
+      "TestCaseID": "GST-004",
+      "ProductTestData": {
+        "ProductName": "Strepsils Sugarfree Lemon Lozenge 16pcs",
+        "Category": "Throat",
+        "isSearchCategory": false,
+        "Brand": "Strepsils",
+        "isSearchBrand": true,
+        "SearchKeyword": "Lozenge",
+        "PurchaseQty": 5,
+        "SearchMode": 1
+      },
+      "DeliveryTestData": {
+        "TestCaseID": "CNC-004",
+        "isHomeDelivery": false,
+        "YuuID": "",
+        "CouponCode": "",
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": false,
+          "IsUpdateQty": false,
+          "newQty": 5,
+          "Email": "",
+          "FullName": "",
+          "Region": "",
+          "District": "",
+          "StreetNumber": "",
+          "Building": "",
+          "Unit": "",
+          "CountryCode": "",
+          "Mobile": ""
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "Lai Chi Kok",
+          "PurchaseQty": 3,
+          "ResultPreference": 2,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
+        }
+      },
+      "PaymentOptions": 4
+    },
+    {
+      "TestCaseID": "GST-005",
+      "ProductTestData": {
+        "ProductName": "Strepsils Sugarfree Lemon Lozenge 16pcs",
+        "Category": "Throat",
+        "isSearchCategory": false,
+        "Brand": "Strepsils",
+        "isSearchBrand": true,
+        "SearchKeyword": "Lozenge",
+        "PurchaseQty": 1,
+        "SearchMode": 1
+      },
+      "DeliveryTestData": {
+        "TestCaseID": "CNC-005",
+        "isHomeDelivery": true,
+        "YuuID": "",
+        "CouponCode": "",
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": false,
+          "IsUpdateQty": false,
+          "newQty": 5,
+          "Email": "",
+          "FullName": "",
+          "Region": "",
+          "District": "",
+          "StreetNumber": "",
+          "Building": "",
+          "Unit": "",
+          "CountryCode": "",
+          "Mobile": ""
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "Central",
+          "PurchaseQty": 14,
+          "ResultPreference": 3,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
+        }
+      },
+      "PaymentOptions": 5
+    },
+    {
+      "TestCaseID": "GST-006",
+      "ProductTestData": {
+        "ProductName": "Strepsils Sugarfree Lemon Lozenge 16pcs",
+        "Category": "Throat",
+        "isSearchCategory": false,
+        "Brand": "Strepsils",
+        "isSearchBrand": true,
+        "SearchKeyword": "Lozenge",
+        "PurchaseQty": 6,
+        "SearchMode": 1
+      },
+      "DeliveryTestData": {
+        "TestCaseID": "CNC-006",
+        "isHomeDelivery": false,
+        "YuuID": "",
+        "CouponCode": "",
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": false,
+          "IsUpdateQty": false,
+          "newQty": 5,
+          "Email": "",
+          "FullName": "",
+          "Region": "",
+          "District": "",
+          "StreetNumber": "",
+          "Building": "",
+          "Unit": "",
+          "CountryCode": "",
+          "Mobile": ""
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "Sham Shui Po",
+          "PurchaseQty": 5,
+          "ResultPreference": 5,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
+        }
+      },
+      "PaymentOptions": 6
     }
   ]
 }

@@ -1,0 +1,28 @@
+{
+    "LoginTestCase": [
+        {
+            "TestCaseId": "LOG-020",
+            "LoginByEmail": false,
+            "EmailAddress": "",
+            "CountryCode": "+852",
+            "MobileNumber": "44720956",
+            "Password": "Abcd1234"
+        },
+        {
+            "TestCaseId": "LOG-021",
+            "LoginByEmail": false,
+            "EmailAddress": "",
+            "CountryCode": "852",
+            "MobileNumber": "44720956",
+            "Password": "Abcd1234"
+        },
+        {
+            "TestCaseId": "LOG-022",
+            "LoginByEmail": true,
+            "EmailAddress": "janet.hkdn@gmail.com",
+            "CountryCode": "",
+            "MobileNumber": "",
+            "Password": "NewSecure123!"
+        }
+    ]
+}

@@ -55,7 +55,7 @@ public class HomeDeliveryTestData {
         this.isUpdateQty = value;
     }
 
-    public long getNewQty() {
+    public int getNewQty() {
         return newQty;
     }
 

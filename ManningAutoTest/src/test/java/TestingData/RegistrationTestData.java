@@ -27,6 +27,24 @@ public class RegistrationTestData {
     @JsonProperty("PasswordConfirm")
     private String passwordConfirm;
 
+    @JsonProperty("ClickTNC")
+    private boolean clickTNC;
+
+    @JsonProperty("ClickPICS")
+    private boolean clickPICS;
+
+    @JsonProperty("ClickPrivacyA")
+    private boolean clickPrivacyA;
+
+    @JsonProperty("ClickDirectMarkteting")
+    private boolean clickDirectMarketing;
+
+    @JsonProperty("ClickPrivacyB")
+    private boolean clickPrivacyB;
+
+    @JsonProperty("ClickSubscribe")
+    private boolean clickSubscribe;
+
     public String getTitle() {
         return title;
     }
@@ -89,6 +107,54 @@ public class RegistrationTestData {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public boolean isClickTNC() {
+        return clickTNC;
+    }
+
+    public void setClickTNC(boolean clickTNC) {
+        this.clickTNC = clickTNC;
+    }
+
+    public boolean isClickPICS() {
+        return clickPICS;
+    }
+
+    public void setClickPICS(boolean clickPICS) {
+        this.clickPICS = clickPICS;
+    }
+
+    public boolean isClickPrivacyA() {
+        return clickPrivacyA;
+    }
+
+    public void setClickPrivacyA(boolean clickPrivacyA) {
+        this.clickPrivacyA = clickPrivacyA;
+    }
+
+    public boolean isClickDirectMarketing() {
+        return clickDirectMarketing;
+    }
+
+    public void setClickDirectMarketing(boolean clickDirectMarketing) {
+        this.clickDirectMarketing = clickDirectMarketing;
+    }
+
+    public boolean isClickPrivacyB() {
+        return clickPrivacyB;
+    }
+
+    public void setClickPrivacyB(boolean clickPrivacyB) {
+        this.clickPrivacyB = clickPrivacyB;
+    }
+
+    public boolean isClickSubscribe() {
+        return clickSubscribe;
+    }
+
+    public void setClickSubscribe(boolean clickSubscribe) {
+        this.clickSubscribe = clickSubscribe;
     }
 
 }

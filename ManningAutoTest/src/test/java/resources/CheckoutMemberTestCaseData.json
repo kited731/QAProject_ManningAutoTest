@@ -1,0 +1,90 @@
+{
+  "PurchaseTestCase": [
+    {
+      "TestCaseID": "MSH-001",
+      "ProductTestData": {
+        "ProductName": "Maro Volume Up Shampoo (Non-Silicone) 460ml",
+        "Category": "Shampoo",
+        "isSearchCategory": true,
+        "Brand": "Maro",
+        "isSearchBrand": true,
+        "SearchKeyword": "hair",
+        "PurchaseQty": 4,
+        "SearchMode": 3
+      },
+      "DeliveryTestData": {
+        "TestCaseID": "MHD-001",
+        "isHomeDelivery": true,
+        "YuuID": "",
+        "CouponCode": "",
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": false,
+          "IsUpdateQty": false,
+          "newQty": 4,
+          "Email": "abc@gmail.com",
+          "FullName": "John Doe",
+          "Region": "Kowloon",
+          "District": "Cheung Sha Wan",
+          "StreetNumber": "15 Abc Street",
+          "Building": "TF Building",
+          "Unit": "1503",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "Lai Chi Kok",
+          "PurchaseQty": 5,
+          "ResultPreference": 1,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
+        }
+      },
+      "PaymentOptions": 1
+    },
+    {
+      "TestCaseID": "MSH-002",
+      "ProductTestData": {
+        "ProductName": "Maro Volume Up Shampoo (Non-Silicone) 460ml",
+        "Category": "Shampoo",
+        "isSearchCategory": true,
+        "Brand": "Maro",
+        "isSearchBrand": true,
+        "SearchKeyword": "hair",
+        "PurchaseQty": 4,
+        "SearchMode": 3
+      },
+      "DeliveryTestData": {
+        "TestCaseID": "MHD-001",
+        "isHomeDelivery": true,
+        "YuuID": "",
+        "CouponCode": "",
+        "HomeDeliveryTestData": {
+          "IsUpdateAddress": true,
+          "IsUpdateQty": true,
+          "newQty": 20,
+          "Email": "abc@gmail.com",
+          "FullName": "John Doe",
+          "Region": "Kowloon",
+          "District": "Cheung Sha Wan",
+          "StreetNumber": "15 Abc Street",
+          "Building": "TF Building",
+          "Unit": "1503",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
+        },
+        "ClickAndCollectTestData": {
+          "SearchKeyword": "",
+          "PurchaseQty": 5,
+          "ResultPreference": 1,
+          "FullName": "John Doe",
+          "Email": "abc@gmail.com",
+          "CountryCode": "+852",
+          "Mobile": "61235123"
+        }
+      },
+      "PaymentOptions": 2
+    }
+  ]
+}

@@ -7,6 +7,8 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import TestingData.LoginTestCase;
+import TestingData.LoginTestCaseData;
 import TestingData.PurchaseTestCase;
 import TestingData.PurchaseTestCaseData;
 import TestingData.RegistrationTestCase;
@@ -30,5 +32,14 @@ public class JsonDataReader {
                 new TypeReference<RegistrationTestCaseData>() {
                 });
         return registrationTestCaseData.getRegistrationTestCases();
+    }
+
+    public List<LoginTestCase> readLoginTestData(String fileName) throws IOException {
+        File jsonFile = new File("src\\test\\java\\resources\\" + fileName);
+
+        LoginTestCaseData loginTestCaseData = objectMapper.readValue(jsonFile,
+                new TypeReference<LoginTestCaseData>() {
+                });
+        return loginTestCaseData.getLoginTestCases();
     }
 }

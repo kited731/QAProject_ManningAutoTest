@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType.LaunchOptions;
+
+import Util.HandleCheckoutHomeDelivery;
+
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
@@ -22,7 +25,8 @@ public class CheckoutMemberTest {
         int purchaseQuantity = 2;
         int minQuantity = 1;
         int maxQuantity = 40;
-        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity + 1); // random between 1 and 40
+        int updateQuantity = ThreadLocalRandom.current().nextInt(minQuantity, maxQuantity + 1); // random between 1 and
+                                                                                                // 40
 
         // Settings
         int clickInteval = 1000;
@@ -72,7 +76,8 @@ public class CheckoutMemberTest {
 
             page.waitForTimeout(waitForTimeout);
             HandleCheckoutHomeDelivery.verifyDeliveryFee(page);
-            HandleCheckoutHomeDelivery.checkout(page);
+            HandleCheckoutHomeDelivery.clickCheckoutSecurelyButton(page);
+            HandleCheckoutHomeDelivery.clickGuestCheckoutButton(page);
             HandleCheckoutHomeDelivery.completeDeliveryDetail(page);
             HandleCheckoutHomeDelivery.changeDeliveryDetail(page);
 

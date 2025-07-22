@@ -1,29 +1,41 @@
 {
   "RegistrationTestCase": [
     {
-      "TestCaseID": "RG-001",
+      "TestCaseID": "MR-013",
       "RegistrationTestData": {
         "Title": "Mr",
-        "FirstName": "ABC",
-        "LastName": "CDE",
-        "Email": "abc@cde.com",
+        "FirstName": "Jackson",
+        "LastName": "Wong",
+        "Email": "fauzitow@netn.top",
         "CountryCode": "+852",
-        "Mobile": "61235123",
-        "Password": "aaabbb111",
-        "PasswordConfirm": "aaabbb111"
+        "Mobile": "90183282",
+        "Password": "A@TeamJKJacky1",
+        "PasswordConfirm": "A@TeamJKJacky1",
+        "ClickTNC": true,
+        "ClickPICS": true,
+        "ClickPrivacyA": true,
+        "ClickDirectMarkteting": true,
+        "ClickPrivacyB": false,
+        "ClickSubscribe": true
       }
     },
     {
-      "TestCaseID": "RG-002",
+      "TestCaseID": "MR-014",
       "RegistrationTestData": {
-        "Title": "Mr",
-        "FirstName": "ABC",
-        "LastName": "CDE",
-        "Email": "abc@cde.com",
+        "Title": "Ms.",
+        "FirstName": "Gareth1",
+        "LastName": "Lee@",
+        "Email": "A@AA",
         "CountryCode": "+852",
-        "Mobile": "61235123",
-        "Password": "aaabbb111",
-        "PasswordConfirm": "aaabbb111"
+        "Mobile": "12345678",
+        "Password": "",
+        "PasswordConfirm": "123456a",
+        "ClickTNC": true,
+        "ClickPICS": true,
+        "ClickPrivacyA": true,
+        "ClickDirectMarkteting": true,
+        "ClickPrivacyB": true,
+        "ClickSubscribe": true
       }
     }
   ]

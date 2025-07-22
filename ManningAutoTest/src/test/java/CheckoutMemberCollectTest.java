@@ -10,6 +10,8 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
+import Util.HandleCheckoutHomeDelivery;
+
 public class CheckoutMemberCollectTest {
     @Test
     public void checkoutTest() {

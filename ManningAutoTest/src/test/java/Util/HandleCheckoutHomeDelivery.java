@@ -1,3 +1,8 @@
+package Util;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.github.javafaker.Faker;
 
 import com.microsoft.playwright.Locator;
@@ -63,7 +68,7 @@ public class HandleCheckoutHomeDelivery {
 
         String freeShipingXpath = "xpath=//div[@class=\"summary-fee_wrapper-Bgk\"]/div[text()=\"Delivery fee\"]/following-sibling::div";
         String nonFreeShippingXpath = "xpath=//div[@class=\"summary-fee_wrapper-Bgk\"]/div[text()=\"Delivery fee\"]/following-sibling::div/span";
-        
+
         String subTotalStr = subtotalSpan.innerText();
         double subTotalPrice = Double.parseDouble(subTotalStr.replace("$", "").replace(",", "").trim());
 
@@ -83,16 +88,19 @@ public class HandleCheckoutHomeDelivery {
 
     }
 
-    public static void checkout(Page page) {
+    public static void clickCheckoutSecurelyButton(Page page) {
         page.waitForTimeout(3000);
         Locator checkOutSecurelyBtn = page
                 .locator("xpath=//div/button[contains(@class,\"btnGroup-btn\")]/span[text()=\"Checkout securely\"]");
         checkOutSecurelyBtn.scrollIntoViewIfNeeded();
         checkOutSecurelyBtn.click();
 
+    }
+
+    public static void clickGuestCheckoutButton(Page page) {
         page.waitForTimeout(5000);
         Locator guestCheckoutBtn = page
-                .locator("//button[contains(@class,\"signIn-guestButton\")]");
+                .locator("xpath=//button[contains(@class,\"signIn-guestButton\")]");
         guestCheckoutBtn.scrollIntoViewIfNeeded();
         guestCheckoutBtn.click();
         page.waitForTimeout(3000);
@@ -193,6 +201,74 @@ public class HandleCheckoutHomeDelivery {
         phoneInput.fill(mobile);
     }
 
+    public static void inputEmail(Page page, String email) {
+        Locator emailInput = page
+                .locator("xpath=//input[@id=\"email\"]");
+        emailInput.scrollIntoViewIfNeeded();
+        emailInput.fill(email);
+    }
+
+    public static void inputFullName(Page page, String fullName) {
+        Locator fullNameInput = page.locator("xpath=//input[@name=\"firstname\"]");
+        fullNameInput.scrollIntoViewIfNeeded();
+        fullNameInput.fill(fullName);
+    }
+
+    public static void selectRegion(Page page, String region) {
+        Locator regionInput = page.locator("#region-root-aGR");
+        regionInput.scrollIntoViewIfNeeded();
+        regionInput.click();
+        Locator regionInputOption = page
+                .locator("xpath=//div[contains(@class,\"react-select__option\")][text()=\"" + region + "\"]");
+        regionInputOption.scrollIntoViewIfNeeded();
+        regionInputOption.click();
+    }
+
+    public static void selectDistrict(Page page, String district) {
+        Locator districtInput = page.locator("#region-root-k7a");
+        districtInput.scrollIntoViewIfNeeded();
+        districtInput.click();
+        Locator districtInputOption = page
+                .locator("xpath=//div[contains(@class,\"react-select__option\")][text()=\"" + district + "\"]");
+        districtInputOption.scrollIntoViewIfNeeded();
+        districtInputOption.click();
+    }
+
+    public static void inputStreetNumber(Page page, String streetNumber) {
+        Locator streetInput = page.locator("xpath=//input[contains(@id,\"street0\")]");
+        streetInput.scrollIntoViewIfNeeded();
+        streetInput.fill(streetNumber);
+    }
+
+    public static void inputBuildingAndEstate(Page page, String buildingName) {
+        Locator buildingInput = page.locator("xpath=//input[contains(@id,\"street1\")]");
+        buildingInput.scrollIntoViewIfNeeded();
+        buildingInput.fill(buildingName);
+    }
+
+    public static void inputUnitAndFloor(Page page, String unitFloor) {
+        Locator unitFloorInput = page.locator("xpath=//input[contains(@id,\"street2\")]");
+        unitFloorInput.scrollIntoViewIfNeeded();
+        unitFloorInput.fill(unitFloor);
+    }
+
+    public static void selectCountryCode(Page page, String countryCode) {
+        Locator countryCodeInput = page.locator("#areaCode");
+        countryCodeInput.scrollIntoViewIfNeeded();
+        countryCodeInput.click();
+        page.locator("xpath=//div[contains(@class,\"react-select__option\")][text()=\"" + countryCode + "\"]").click();
+    }
+
+    public static void inputMobileNumber(Page page, String countryCode, String mobileNumber) {
+        Locator phoneInput = page.locator("xpath=//input[contains(@id,\"telephone\")]");
+        phoneInput.fill(mobileNumber);
+        if (!verifyMobile(countryCode, mobileNumber)) {
+            Locator errorMessageLocator = page.locator("xpath=//p[text()=\"Please enter a valid mobile number\"]");
+            String errorMessage = "Please enter a valid mobile number";
+            PlaywrightAssertions.assertThat(errorMessageLocator).hasText(errorMessage);
+        }
+    }
+
     public static void confirmAddress(Page page) {
         // Confirm address button
         Locator confirmAddressBtn = page.locator("xpath=//button[@type=\"submit\"]/span[text()=\"Confirm address\"]");
@@ -201,10 +277,30 @@ public class HandleCheckoutHomeDelivery {
         page.waitForTimeout(5000);
     }
 
+    public static void clickAddAddresButton(Page page) {
+        Locator addButton = page.locator("xpath=//div/button/span[text()=\"Add\"]");
+        addButton.scrollIntoViewIfNeeded();
+        addButton.click();
+    }
+
     public static void confirmDetail(Page page) {
         // Confirm Details button
         Locator confirmDetailBtn = page.getByRole(AriaRole.BUTTON, new GetByRoleOptions().setName("Confirm Details"));
         confirmDetailBtn.scrollIntoViewIfNeeded();
         confirmDetailBtn.click();
+    }
+
+    private static boolean verifyMobile(String countryCode, String mobileNumber) {
+        String regex = "";
+        if (countryCode.equals("+852")) {
+            regex = "^[2-9][0-9]{7}$";
+        } else if (countryCode.equals("+853")) {
+            regex = "^[6][0-9]{7}$";
+        } else if (countryCode.equals("+86")) {
+            regex = "^1[3-9][0-9]{10}$";
+        }
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mobileNumber);
+        return matcher.matches();
     }
 }

@@ -1,3 +1,5 @@
+package Util;
+
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
@@ -13,7 +15,9 @@ public class HandleCaptcha {
         if (captcha.isVisible()) {
             captcha.click();
             // Pause for the captcha input
-            page.pause();
+            // page.pause();
+            // Change to wait for 15s for recording purposes
+            page.waitForTimeout(15000);
         }
 
     }

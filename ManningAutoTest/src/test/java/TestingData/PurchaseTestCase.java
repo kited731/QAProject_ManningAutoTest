@@ -39,7 +39,7 @@ public class PurchaseTestCase {
         this.deliveryTestData = value;
     }
 
-    public long getPaymentOptions() {
+    public int getPaymentOptions() {
         return paymentOptions;
     }
 
